@@ -1,11 +1,8 @@
 package spocktest
 
-class MyDomain {
+class AnotherDomain {
 	
 	String navn
-	Integer tal
-	
-	static hasMany = [AnotherDomain]
 
     static constraints = {
     }

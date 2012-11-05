@@ -1,6 +1,8 @@
 package spocktest
 
 class MyFineService {
+	
+	AnotherFineService anotherFineService
 
     def findAlle(navn) {
 		MyDomain.findAllByNavn(navn)
@@ -11,6 +13,7 @@ class MyFineService {
 	}
 	
 	def kasterop(){
-		throw new IllegalArgumentException("øv")
+		anotherFineService.kasterop()
 	}
+	
 }
