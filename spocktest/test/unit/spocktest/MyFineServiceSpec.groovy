@@ -11,14 +11,8 @@ class MyFineServiceSpec extends Specification {
         service.anotherFineService = new AnotherFineService()
     }
 
+
     //beregn regner rigtigt (||)
-    //thrown fra AnotherFineService (kasterop)
-    //mock AnotherFineService (slip for thrown)
-    //mock AnotherFineService (hentNoget) (flere parametre)
-    //mock AnotherFineService (kardinalitet af kald)
-    //partial mock af service (enBeregninn og megetTungMetode)
-
-
     def "beregn regner rigtigt"() {
         expect:
         service.beregn(tal1, tal2) == resultat
@@ -30,6 +24,7 @@ class MyFineServiceSpec extends Specification {
     }
 
 
+    //thrown fra AnotherFineService (kasterop)
     def "forventer exception"() {
         when:
         service.kasterop()
@@ -40,6 +35,7 @@ class MyFineServiceSpec extends Specification {
     }
 
 
+    //mock AnotherFineService (slip for thrown)
     def "mock af anden service"() {
         setup:
         service.anotherFineService = Mock(AnotherFineService)
@@ -50,6 +46,7 @@ class MyFineServiceSpec extends Specification {
     }
 
 
+    //mock AnotherFineService (hentNoget) (flere parametre)
     def "mock med flere parametre"() {
         expect:
         service.hentNoget() == 42
@@ -63,6 +60,7 @@ class MyFineServiceSpec extends Specification {
     }
 
 
+    //mock AnotherFineService (kardinalitet af kald)
     def "kardinalitet på mocks"() {
         setup:
         service.anotherFineService = Mock(AnotherFineService)
@@ -75,12 +73,8 @@ class MyFineServiceSpec extends Specification {
         0 * service.anotherFineService.hentNogetFraEnDyrRessource(42, _, _)
     }
 
-//Eksempel med JUnit
-//    def strictControl = mockFor(MyService)
-//    strictControl.demand.someMethod(0..2) { String arg1, int arg2 -> … }
-//    strictControl.demand.static.aStaticMethod {-> … }
 
-
+    //partial mock (SPY) af service (enBeregninn og megetTungMetode)
     def "partial mocking af service"() {
         given:
         def partialMock = Spy(MyFineService) {
