@@ -7,16 +7,8 @@ import spock.lang.Specification
 class MyFineControllerSpec extends Specification {
 
 
-
-    def "redirect action"() {
-        when:
-        controller.redirectaction("42")
-
-        then:
-        response.redirectUrl == "/myFine/myaction?cvr=42"
-    }
-
-    def "alm action"() {
+    //alm. return action - tjek parametre på model
+    def "my action"() {
         setup:
         controller.params.arg1 = 42
 
@@ -34,6 +26,8 @@ class MyFineControllerSpec extends Specification {
         controller.session.arg1 == 84
     }
 
+
+    //render action - tjek response.text
     def "render action"() {
         when:
         controller.renderaction("42")
@@ -42,12 +36,24 @@ class MyFineControllerSpec extends Specification {
         response.text == "more text 42"
     }
 
+
+    //render action JSON - tjek response.text (i json format)
     def "render action json"() {
         when:
         controller.renderactionjson("42")
 
         then:
         response.text == '{"cvr":"42"}'
+    }
+
+
+    //redirect action - tjek response.redirectUrl
+    def "redirect action"() {
+        when:
+        controller.redirectaction("42")
+
+        then:
+        response.redirectUrl == "/myFine/myaction?cvr=42"
     }
 
 }
