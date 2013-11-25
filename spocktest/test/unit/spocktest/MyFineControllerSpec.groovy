@@ -6,6 +6,16 @@ import spock.lang.Specification
 @TestFor(MyFineController)
 class MyFineControllerSpec extends Specification {
 
+
+
+    def "redirect action"() {
+        when:
+        controller.redirectaction("42")
+
+        then:
+        response.redirectUrl == "/myFine/myaction?cvr=42"
+    }
+
     def "alm action"() {
         setup:
         controller.params.arg1 = 42

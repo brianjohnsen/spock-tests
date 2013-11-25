@@ -15,6 +15,10 @@ class MyFineController {
         render("more text $cvr")
     }
 
+    def redirectaction(String cvr) {
+        redirect(action: "myaction", params: [cvr: cvr])
+    }
+
     def renderactionjson(String cvr) {
         render(['cvr': cvr] as JSON)
     }
