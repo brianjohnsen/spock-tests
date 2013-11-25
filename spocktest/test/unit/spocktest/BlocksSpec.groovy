@@ -5,32 +5,48 @@ import spock.lang.Unroll
 
 class BlocksSpec extends Specification {
 
-
     //Testblocks (given/when/then/where/unroll)
 
     @Unroll
-    def "Det dobbelte af #anInt er #aDouble"() {
+    def "Det dobbelte af #tal er #dobbelt"() {
         given:
         def my = new MyClass()
 
         when:
-        my.anInt = anInt
+        my.tal = tal
 
         then:
-        my.double == aDouble
+        my.dobbelt == dobbelt
 
         where:
-        anInt | aDouble
-        1     | 2
-        2     | 4
+        tal | dobbelt
+        1   | 2
+        2   | 4
+    }
+
+
+    def "noget med en streng"() {
+        setup:
+        def my = new MyClass(streng: "hest", tal: 42)
+
+        when:
+        my.tal = 43
+
+        then:
+        old(my.tal) < 43
+        with(my) {
+            tal == 43
+            streng == "hest"
+        }
     }
 
 
     class MyClass {
-        int anInt
+        int tal
+        String streng
 
-        int getDouble() {
-            anInt * 2
+        int getDobbelt() {
+            tal * 2
         }
     }
 
